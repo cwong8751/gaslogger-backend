@@ -1,0 +1,23 @@
+{
+  "name": "gaslogger-backend",
+  "version": "1.0.0",
+  "description": "The backend for the gaslogger application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cwong8751/gaslogger-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cwong8751/gaslogger-backend/issues"
+  },
+  "homepage": "https://github.com/cwong8751/gaslogger-backend#readme",
+  "dependencies": {
+    "openai": "^6.42.0"
+  }
+}
