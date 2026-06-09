@@ -12,18 +12,20 @@ export default async function handler(req, res) {
     }
 
     try {
-        const { image } = req.body;
+        const { image_url } = req.body;
 
-        if (!image) {
+        if (!image_url) {
             return res.status(400).json({
-                error: "Missing image",
+                error: "Missing image_url",
             });
         }
 
-        // cap size of incoming image at 5mb 
-        if (image.length > 5 * 1024 * 1024) {
+        // Basic sanity check — must look like a URL
+        try {
+            new URL(image_url);
+        } catch {
             return res.status(400).json({
-                error: "Image size exceeds 5MB limit",
+                error: "image_url is not a valid URL",
             });
         }
 
@@ -39,7 +41,7 @@ export default async function handler(req, res) {
                         },
                         {
                             type: "input_image",
-                            image_url: image
+                            image_url: image_url
                         }
                     ]
                 }
