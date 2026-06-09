@@ -12,14 +12,17 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "Missing file" });
     }
 
-    // file should be base64 or buffer depending on your frontend setup
-    const blob = await put(filename || "upload.jpg", file, {
-      access: "public",
+    // FIX: convert base64 → buffer
+    const buffer = Buffer.from(file, "base64");
+
+    const blob = await put(filename || "upload.jpg", buffer, {
+      access: "private" // or "public"
     });
 
     return res.status(200).json({
-      url: blob.url,
+      url: blob.url
     });
+
   } catch (err) {
     console.error(err);
     return res.status(500).json({ error: "Upload failed" });
