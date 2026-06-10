@@ -1,4 +1,6 @@
 import OpenAI from "openai";
+import {del} from '@vercel/blob';
+
 
 const client = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
@@ -93,5 +95,12 @@ export default async function handler(req, res) {
         return res.status(500).json({
             error: "Internal server error"
         });
+    } finally {
+        // remove the uploaded image from vercel blob 
+        try {
+            await del(image_url);
+        } catch (error) {
+            console.error("Failed to delete image from Vercel Blob:", error);
+        }
     }
 }
