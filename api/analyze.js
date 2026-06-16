@@ -16,11 +16,6 @@ export default async function handler(req, res) {
     try {
         const { image_url } = req.body;
 
-        if (!image_url) {
-            return res.status(400).json({
-                error: "Missing image_url",
-            });
-        }
 
         // Basic sanity check — must look like a URL
         try {
